@@ -8,8 +8,14 @@ const globalForPrisma = globalThis as unknown as {
 
 function createPrismaClient() {
   const connectionString = process.env.DATABASE_URL;
+
+  // During `next build`, DATABASE_URL may not be present (static page collection).
+  // Return a bare client so the module loads without crashing; actual DB calls
+  // will fail at runtime if the env var is truly missing in production.
   if (!connectionString) {
-    throw new Error("DATABASE_URL environment variable is not set");
+    return new PrismaClient({
+      log: ["error"],
+    });
   }
 
   // Supabase's connection pooler uses a self-signed certificate chain.

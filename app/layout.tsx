@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito, Barlow } from "next/font/google";
 import "./globals.css";
-import { checkDbConnection } from "@/lib/prisma";
 import Scripts from "@/components/Scripts";
 
 const nunito = Nunito({
@@ -28,7 +27,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  await checkDbConnection();
   return (
     <html lang="en">
       <head>
