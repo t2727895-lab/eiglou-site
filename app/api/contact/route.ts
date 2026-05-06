@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 // POST /api/contact  — store a contact form submission
 export async function POST(request: NextRequest) {
   try {

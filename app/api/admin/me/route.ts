@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 // GET /api/admin/me — returns current admin profile (no password)
 export async function GET() {
   try {

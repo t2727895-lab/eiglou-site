@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 // DELETE /api/newsletter/[id]  — admin removes a subscriber
 export async function DELETE(
   _req: NextRequest,

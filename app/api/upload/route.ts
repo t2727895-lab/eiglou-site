@@ -4,6 +4,8 @@ import { writeFile, mkdir } from "fs/promises";
 import { join, extname } from "path";
 import { randomUUID } from "crypto";
 
+export const dynamic = "force-dynamic";
+
 const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"];
 const MAX_SIZE_BYTES = 5 * 1024 * 1024; // 5 MB
 

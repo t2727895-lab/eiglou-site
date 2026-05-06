@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getSession } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 // PATCH /api/contact/[id]  — mark as read/unread
 export async function PATCH(
   request: NextRequest,
