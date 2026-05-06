@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== TipTap Rich Text Editor Styles ===== */
+.ProseMirror {
+  outline: none;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Prose styles for editor content */
+.prose h1 { font-size: 2em; font-weight: 700; margin: 0.67em 0; }
+.prose h2 { font-size: 1.5em; font-weight: 700; margin: 0.75em 0; }
+.prose h3 { font-size: 1.17em; font-weight: 700; margin: 0.83em 0; }
+.prose p { margin: 0.5em 0; line-height: 1.7; }
+.prose ul { list-style-type: disc; padding-left: 1.5em; margin: 0.5em 0; }
+.prose ol { list-style-type: decimal; padding-left: 1.5em; margin: 0.5em 0; }
+.prose li { margin: 0.25em 0; }
+.prose blockquote {
+  border-left: 4px solid #6366f1;
+  padding-left: 1em;
+  margin: 1em 0;
+  color: #6b7280;
+  font-style: italic;
+}
+.prose code {
+  background: #f3f4f6;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+  font-family: monospace;
+}
+.prose pre {
+  background: #1f2937;
+  color: #f9fafb;
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1em 0;
+}
+.prose a {
+  color: #6366f1;
+  text-decoration: underline;
+}
+.prose strong { font-weight: 700; }
+.prose em { font-style: italic; }
+.prose s { text-decoration: line-through; }
+
+/* Blog content display (public-facing) */
+.blog-content h1 { font-size: 2em; font-weight: 700; margin: 0.67em 0; }
+.blog-content h2 { font-size: 1.5em; font-weight: 700; margin: 0.75em 0; }
+.blog-content h3 { font-size: 1.17em; font-weight: 700; margin: 0.83em 0; }
+.blog-content p { margin: 0.75em 0; line-height: 1.8; }
+.blog-content ul { list-style-type: disc; padding-left: 1.5em; margin: 0.75em 0; }
+.blog-content ol { list-style-type: decimal; padding-left: 1.5em; margin: 0.75em 0; }
+.blog-content li { margin: 0.4em 0; }
+.blog-content blockquote {
+  border-left: 4px solid #6366f1;
+  padding-left: 1em;
+  margin: 1em 0;
+  color: #6b7280;
+  font-style: italic;
+}
+.blog-content code {
+  background: #f3f4f6;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.875em;
+  font-family: monospace;
+}
+.blog-content pre {
+  background: #1f2937;
+  color: #f9fafb;
+  padding: 1em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+.blog-content img { max-width: 100%; height: auto; border-radius: 8px; margin: 1em 0; }
+.blog-content a { color: #6366f1; text-decoration: underline; }
+.blog-content strong { font-weight: 700; }
+.blog-content em { font-style: italic; }
+
+/* ===== Sliding Text marquee re-init fix ===== */
+/* Ensure the wrap clips overflow so marquee scrolls correctly */
+.sliding-text-one__wrap {
+  overflow: hidden;
+}

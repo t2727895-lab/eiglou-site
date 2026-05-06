@@ -1,0 +1,153 @@
+// Prisma 7 schema - datasource URL is configured in prisma.config.ts
+
+generator client {
+  provider   = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id          Int       @id @default(autoincrement())
+  name        String
+  email       String    @unique
+  password    String
+  phone       String?
+  avatar      String?
+  role        String    @default("admin")   // admin | superadmin
+  isActive    Boolean   @default(true)
+  lastLoginAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  blogs       Blog[]    // blogs authored by this admin
+
+  @@map("admins")
+}
+
+model Blog {
+  id          Int       @id @default(autoincrement())
+  title       String
+  slug        String    @unique
+  excerpt     String?
+  content     String
+  image       String?
+  category    String    @default("General")
+  tags        String?   // comma-separated e.g. "nextjs,react,typescript"
+  status      String    @default("published")  // draft | published
+  views       Int       @default(0)
+  authorId    Int?
+  author      Admin?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([slug])
+  @@index([status])
+  @@index([category])
+  @@map("blogs")
+}
+
+model Service {
+  id          Int          @id @default(autoincrement())
+  title       String
+  slug        String       @unique
+  tagline     String?
+  description String
+  icon        String?      // CSS icon class e.g. "icon-ux-design"
+  image       String?
+  status      String       @default("published")  // draft | published
+  order       Int          @default(0)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  faqs        ServiceFaq[]
+
+  @@index([slug])
+  @@index([status])
+  @@map("services")
+}
+
+model ServiceFaq {
+  id         Int      @id @default(autoincrement())
+  question   String
+  answer     String
+  order      Int      @default(0)
+  serviceId  Int
+  service    Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([serviceId])
+  @@map("service_faqs")
+}
+
+model Project {
+  id           Int       @id @default(autoincrement())
+  title        String
+  slug         String    @unique
+  tagline      String?                        // one-liner shown on cards
+  description  String                         // rich text
+  coverImage   String?                        // main hero image
+  images       String?                        // JSON array of extra gallery URLs
+  category     String    @default("Web")      // Web | Mobile | Design | Branding | etc.
+  tags         String?                        // comma-separated
+  client       String?                        // client / company name
+  url          String?                        // live project URL
+  githubUrl    String?                        // repo URL
+  status       String    @default("published") // draft | published
+  featured     Boolean   @default(false)      // pin to top / highlight
+  completedAt  DateTime?                      // project completion date
+  order        Int       @default(0)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([slug])
+  @@index([status])
+  @@index([category])
+  @@index([featured])
+  @@map("projects")
+}
+
+model Review {
+  id         Int      @id @default(autoincrement())
+  name       String                        // client name
+  avatar     String?                       // uploaded photo URL
+  tagline    String?                       // company name or job title
+  review     String                        // the review text
+  rating     Int      @default(5)         // 1–5 stars
+  status     String   @default("published") // draft | published
+  featured   Boolean  @default(false)
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([status])
+  @@index([featured])
+  @@map("reviews")
+}
+
+model Subscriber {
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  subscribedAt DateTime @default(now())
+
+  @@index([subscribedAt])
+  @@map("subscribers")
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([isRead])
+  @@index([createdAt])
+  @@map("contact_messages")
+}
