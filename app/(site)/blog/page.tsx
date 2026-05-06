@@ -60,7 +60,7 @@ export default async function BlogPage() {
                     <p>No blog posts yet. Check back soon!</p>
                   </div>
                 ) : (
-                  posts.map((post) => {
+                  posts.map((post: (typeof posts)[number]) => {
                     const tags = post.tags
                       ? post.tags.split(',').map((t: string) => t.trim()).filter((s: string) => s.length > 0)
                       : [post.category];
