@@ -43,7 +43,7 @@ next-env.d.ts
 /app/generated/prisma
 
 # uploaded media files
-/public/uploads/
+# /public/uploads/
 
 .vercel
 .env*.local
