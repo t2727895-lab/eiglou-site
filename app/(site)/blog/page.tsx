@@ -73,7 +73,7 @@ export default async function BlogPage() {
                         <div className="blog-list__img">
                           <img src={post.image || PLACEHOLDER_IMG} alt={post.title} />
                           <div className="blog-list__tags">
-                            {tags.slice(0, 2).map((tag) => (
+                            {tags.slice(0, 2).map((tag: string) => (
                               <span key={tag}>{tag}</span>
                             ))}
                           </div>
