@@ -37,8 +37,8 @@ export default async function BlogDetailsPage({ params }: Props) {
 
   if (!post || post.status !== 'published') notFound();
 
-  const tags = post.tags
-    ? post.tags.split(',').map((t: string) => t.trim()).filter((s: string): s is string => s.length > 0)
+  const tags: string[] = post.tags
+    ? post.tags.split(',').map((t: string) => t.trim()).filter((s: string) => s.length > 0)
     : [];
 
   const formattedDate = post.createdAt.toLocaleDateString('en-US', {

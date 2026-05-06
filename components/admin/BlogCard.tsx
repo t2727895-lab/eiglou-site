@@ -47,8 +47,8 @@ export default function BlogCard({ blog, onDelete }: BlogCardProps) {
     ? blog.excerpt
     : blog.content.replace(/<[^>]+>/g, "").slice(0, 120) + "...";
 
-  const tagList = blog.tags
-    ? blog.tags.split(",").map((t: string) => t.trim()).filter((s: string): s is string => s.length > 0)
+  const tagList: string[] = blog.tags
+    ? blog.tags.split(",").map((t: string) => t.trim()).filter((s: string) => s.length > 0)
     : [];
 
   const formattedDate = new Date(blog.createdAt).toLocaleDateString("en-US", {
