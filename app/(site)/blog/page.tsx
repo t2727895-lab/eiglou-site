@@ -62,7 +62,7 @@ export default async function BlogPage() {
                 ) : (
                   posts.map((post) => {
                     const tags = post.tags
-                      ? post.tags.split(',').map((t: string) => t.trim()).filter(Boolean)
+                      ? post.tags.split(',').map((t: string) => t.trim()).filter((s): s is string => s.length > 0)
                       : [post.category];
                     const excerpt =
                       post.excerpt ||
