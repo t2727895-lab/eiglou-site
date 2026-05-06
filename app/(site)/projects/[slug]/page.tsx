@@ -47,7 +47,7 @@ export default async function ProjectDetailPage({ params }: Props) {
     orderBy: [{ featured: 'desc' }, { order: 'asc' }, { createdAt: 'desc' }],
     select: { id: true, title: true, slug: true },
   });
-  const currentIndex = allProjects.findIndex((p) => p.slug === slug);
+  const currentIndex = allProjects.findIndex((p: { id: number; title: string; slug: string }) => p.slug === slug);
   const prevProject  = currentIndex > 0 ? allProjects[currentIndex - 1] : null;
   const nextProject  = currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null;
 
