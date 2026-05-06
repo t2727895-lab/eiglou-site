@@ -38,7 +38,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   // Parse tags
   const tags = project.tags
-    ? project.tags.split(',').map((t) => t.trim()).filter(Boolean)
+    ? project.tags.split(',').map((t: string) => t.trim()).filter(Boolean)
     : [];
 
   // Prev / Next navigation among published projects

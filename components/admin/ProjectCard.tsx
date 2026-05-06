@@ -46,7 +46,7 @@ export default function ProjectCard({ project, onDelete }: ProjectCardProps) {
   };
 
   const tagList = project.tags
-    ? project.tags.split(",").map((t) => t.trim()).filter(Boolean)
+    ? project.tags.split(",").map((t: string) => t.trim()).filter(Boolean)
     : [];
 
   const galleryCount = (() => {

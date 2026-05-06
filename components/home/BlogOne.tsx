@@ -47,7 +47,7 @@ export default async function BlogOne() {
   const [featured, ...sidePosts] = posts;
 
   const getTags = (tags: string | null) =>
-    tags ? tags.split(',').map((t) => t.trim()).filter(Boolean).slice(0, 2) : [];
+    tags ? tags.split(',').map((t: string) => t.trim()).filter(Boolean).slice(0, 2) : [];
 
   return (
     <section className="blog-one">
