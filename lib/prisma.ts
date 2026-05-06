@@ -9,12 +9,17 @@ const globalForPrisma = globalThis as unknown as {
 function createPrismaClient() {
   const connectionString = process.env.DATABASE_URL;
 
-  // During `next build`, DATABASE_URL may not be present (static page collection).
-  // Return a bare client so the module loads without crashing; actual DB calls
-  // will fail at runtime if the env var is truly missing in production.
   if (!connectionString) {
-    return new PrismaClient({
-      log: ["error"],
+    // During `next build`, DATABASE_URL is not available.
+    // Return a proxy that throws only when a DB method is actually called,
+    // not at module load time — so the build can collect page data safely.
+    return new Proxy({} as PrismaClient, {
+      get(_target, prop) {
+        if (prop === "then") return undefined; // not a Promise
+        throw new Error(
+          `DATABASE_URL is not set. Cannot call prisma.${String(prop)}()`
+        );
+      },
     });
   }
 
